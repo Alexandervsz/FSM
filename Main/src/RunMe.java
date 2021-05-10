@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RunMe {
@@ -16,7 +17,8 @@ public class RunMe {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine();
-        s0.makeConnection(input,new StringBuilder());
+        ArrayList<String> newlist = new ArrayList<>();
+        s0.makeConnection(input.toUpperCase(), newlist);
     }
 
 
