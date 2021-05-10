@@ -16,7 +16,7 @@ public class RunMe {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine();
-        System.out.println(s0.makeConnection(input,new StringBuilder()));
+        s0.makeConnection(input,new StringBuilder());
     }
 
 
