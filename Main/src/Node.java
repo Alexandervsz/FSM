@@ -24,7 +24,7 @@ public class Node implements NodeInterface {
                 if (nodeA != null) {
                     nodeA.makeConnection(input, output);
                 } else {
-                    System.out.println("Kwam bij s2 met een A, dus gestopt.\nAfgelopen route:" + output);
+                    System.out.println("Kwam bij s2 met een A, dus gestopt.\nAfgelopen route: " + output);
                 }
 
             } else if (input.charAt(0) == 'B') {
@@ -34,11 +34,11 @@ public class Node implements NodeInterface {
 
             } else {
                 output.add(nodeName);
-                System.out.println("Kwam bij ongeldige letter dus gestopt\nAfgelopen pad:" + output);
+                System.out.println("Kwam bij ongeldige letter dus gestopt\nAfgelopen route: " + output);
             }
         } else {
             output.add(nodeName);
-            System.out.println("Letters op, afgelopen pad:" + output);
+            System.out.println("Letters op.\nAfgelopen route: " + output);
         }
     }
 
