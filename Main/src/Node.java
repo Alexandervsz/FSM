@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+
 public class Node implements NodeInterface {
     private final String nodeName;
     private Node nodeA;
