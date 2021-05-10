@@ -1,3 +1,3 @@
 public interface NodeInterface {
-    String makeConnection(char Letter);
+    String makeConnection(String input, StringBuilder output);
 }
