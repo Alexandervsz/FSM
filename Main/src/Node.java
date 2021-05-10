@@ -3,6 +3,17 @@ public class Node implements NodeInterface {
     private Node nodeA;
     private Node nodeB;
 
+    public Node(String nodeName, Node nodeA, Node nodeB) {
+        this.nodeName = nodeName;
+        this.nodeA = nodeA;
+        this.nodeB = nodeB;
+    }
+
+    public Node(String nodeName, Node nodeA) {
+        this.nodeName = nodeName;
+        this.nodeA = nodeA;
+    }
+
     public String makeConnection(String input, StringBuilder output) {
         if (input.charAt(0) == 'A') {
             input = input.substring(1);
