@@ -21,23 +21,22 @@ public class Node implements NodeInterface {
                 input = input.substring(1);
                 output.append(nodeName);
                 output.append(",");
-                nodeA.makeConnection(input, output);
+                if (nodeA != null) {
+                    nodeA.makeConnection(input, output);
+                } else {
+                    return "Kwam bij s2 met een A, dus gestopt.";
+                }
 
             } else if (input.charAt(0) == 'B') {
                 input = input.substring(1);
                 output.append(nodeName);
                 output.append(",");
-                if (nodeB != null) {
-                    nodeB.makeConnection(input, output);
-                } else {
-                    return "Kwam bij s2 met een A, dus gestopt.";
-                }
+                nodeB.makeConnection(input, output);
+
             } else {
                 return "Kwam bij ongeldige letter dus gestopt\n afgelopen pad:" + output.toString();
             }
-        }
-        else
-        {
+        } else {
             output.append(nodeName);
         }
         return "Letters op, afgelopen pad:" + output;
