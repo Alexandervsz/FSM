@@ -15,7 +15,7 @@ public class Node implements NodeInterface {
         this.nodeName = nodeName;
     }
 
-    public String makeConnection(String input, StringBuilder output) {
+    public void makeConnection(String input, StringBuilder output) {
         if (input.length() > 0) {
             if (input.charAt(0) == 'A') {
                 input = input.substring(1);
@@ -24,7 +24,7 @@ public class Node implements NodeInterface {
                 if (nodeA != null) {
                     nodeA.makeConnection(input, output);
                 } else {
-                    return "Kwam bij s2 met een A, dus gestopt.";
+                    System.out.println("Kwam bij s2 met een A, dus gestopt.");
                 }
 
             } else if (input.charAt(0) == 'B') {
@@ -34,12 +34,15 @@ public class Node implements NodeInterface {
                 nodeB.makeConnection(input, output);
 
             } else {
-                return "Kwam bij ongeldige letter dus gestopt\n afgelopen pad:" + output.toString();
+                output.append(nodeName);
+                System.out.println("Kwam bij ongeldige letter dus gestopt\nAfgelopen pad:" + output);
             }
         } else {
             output.append(nodeName);
+            System.out.println("Letters op, afgelopen pad:" + output);
         }
-        return "Letters op, afgelopen pad:" + output;
     }
+
 }
+
 
