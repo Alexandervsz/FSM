@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 public class Node implements NodeInterface {
     private final String nodeName;
     private Node nodeA;
@@ -15,30 +16,28 @@ public class Node implements NodeInterface {
         this.nodeName = nodeName;
     }
 
-    public void makeConnection(String input, StringBuilder output) {
+    public void makeConnection(String input, ArrayList<String> output) {
         if (input.length() > 0) {
             if (input.charAt(0) == 'A') {
                 input = input.substring(1);
-                output.append(nodeName);
-                output.append(",");
+                output.add(nodeName);
                 if (nodeA != null) {
                     nodeA.makeConnection(input, output);
                 } else {
-                    System.out.println("Kwam bij s2 met een A, dus gestopt.");
+                    System.out.println("Kwam bij s2 met een A, dus gestopt.\nAfgelopen route:" + output);
                 }
 
             } else if (input.charAt(0) == 'B') {
                 input = input.substring(1);
-                output.append(nodeName);
-                output.append(",");
+                output.add(nodeName);
                 nodeB.makeConnection(input, output);
 
             } else {
-                output.append(nodeName);
+                output.add(nodeName);
                 System.out.println("Kwam bij ongeldige letter dus gestopt\nAfgelopen pad:" + output);
             }
         } else {
-            output.append(nodeName);
+            output.add(nodeName);
             System.out.println("Letters op, afgelopen pad:" + output);
         }
     }
