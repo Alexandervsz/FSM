@@ -18,6 +18,8 @@ public class Node implements NodeInterface {
     }
 
     public void makeConnection(String input, ArrayList<String> output) {
+        /* This function tells the node whether to go to a next node or not (and which node should be activated,
+         or stops the recursion if conditions are met. (No more letters left or invalid letter found) */
         if (input.length() > 0) {
             if (input.charAt(0) == 'A') {
                 input = input.substring(1);
