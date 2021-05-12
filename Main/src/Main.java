@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,8 +16,7 @@ public class Main {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine();
-        ArrayList<String> newlist = new ArrayList<>();
-        s0.connect(input.toUpperCase(), newlist);
+        s0.connect(input.toUpperCase());
     }
 
 

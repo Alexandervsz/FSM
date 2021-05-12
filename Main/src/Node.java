@@ -14,7 +14,13 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
+    public void connect(String input) {
+        ArrayList<String> output = new ArrayList<>();
+        connect(input, output);
+    }
+
     public void connect(String input, ArrayList<String> output) {
+
         /* This function tells the node whether to go to a next node or not (and which node should be activated,
          or stops the recursion if conditions are met. (No more letters left or invalid letter found) */
         output.add(nodeName);
