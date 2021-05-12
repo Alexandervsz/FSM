@@ -4,16 +4,13 @@ import java.util.Map;
 
 public class Node {
     private final String nodeName;
-    private Map<String, Node> nodeConnections = new HashMap<>();
-
-
+    private final Map<String, Node> nodeConnections = new HashMap<>();
 
     public Node(String nodeName) {
         this.nodeName = nodeName;
     }
 
-
-    public void makeConnection(String letter, Node node){
+    public void makeConnection(String letter, Node node) {
         nodeConnections.put(letter, node);
     }
 
@@ -22,8 +19,8 @@ public class Node {
          or stops the recursion if conditions are met. (No more letters left or invalid letter found) */
         output.add(nodeName);
         if (input.length() > 0) {
-            if (nodeConnections.containsKey(input.substring(0,1))) {
-                Node new_node = nodeConnections.get(input.substring(0,1));
+            if (nodeConnections.containsKey(input.substring(0, 1))) {
+                Node new_node = nodeConnections.get(input.substring(0, 1));
                 input = input.substring(1);
                 new_node.connect(input, output);
             } else {
