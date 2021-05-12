@@ -11,18 +11,19 @@ public class Node {
     }
 
     public void makeConnection(String letter, Node node) {
+        // Inserts a connection to a certain node.
         nodeConnections.put(letter, node);
     }
 
     public void connect(String input) {
+        // Helper function to create Arraylist.
         ArrayList<String> output = new ArrayList<>();
         connect(input, output);
     }
 
     public void connect(String input, ArrayList<String> output) {
 
-        /* This function tells the node whether to go to a next node or not (and which node should be activated,
-         or stops the recursion if conditions are met. (No more letters left or invalid letter found) */
+        /* This function tells the node whether to go to a next node or not. */
         output.add(nodeName);
         if (input.length() > 0) {
             if (nodeConnections.containsKey(input.substring(0, 1))) {
