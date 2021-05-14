@@ -9,10 +9,15 @@ public class Main {
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine().toUpperCase();
 
-        Map<String, ArrayList<String>> output = s0.connect(input);
-        for (Map.Entry<String, ArrayList<String>> entry : output.entrySet()) {
-            String message = entry.getKey();
+        Map<Integer, ArrayList<String>> output = s0.connect(input);
+        for (Map.Entry<Integer, ArrayList<String>> entry : output.entrySet()) {
+            Integer resultState = entry.getKey();
             ArrayList<String> visitedNodes = entry.getValue();
+            String message = switch (resultState) {
+                case 0 -> "Kwam bij ongeldige letter, dus gestopt.\nAfgelopen route: ";
+                case 1 -> "Letters op.\nAfgelopen route: ";
+                default -> "Onbekende fout opgetreden.";
+            };
             System.out.println(message);
             for (String node: visitedNodes){
                 System.out.println(node);
