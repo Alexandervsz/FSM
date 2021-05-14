@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] kwargs) {
@@ -9,8 +8,16 @@ public class Main {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine().toUpperCase();
-        System.out.println(s0.connect(input, new ArrayList<>()));
 
+        Map<String, ArrayList<String>> output = s0.connect(input);
+        for (Map.Entry<String, ArrayList<String>> entry : output.entrySet()) {
+            String message = entry.getKey();
+            ArrayList<String> visitedNodes = entry.getValue();
+            System.out.println(message);
+            for (String node: visitedNodes){
+                System.out.println(node);
+            }
+        }
 
     }
 
