@@ -21,7 +21,7 @@ public class Node {
     }
 
 
-    public Map<String, ArrayList<String>> connect(String input) {
+    public Map<Integer, ArrayList<String>> connect(String input) {
         /* This function tells the node whether to go to a next node or not. */
         output.add(nodeName);
         if (input.length() > 0) {
@@ -31,17 +31,17 @@ public class Node {
                 new_node.setOutput(output);
                 new_node.connect(input);
             } else {
-                Map<String, ArrayList<String>> outputMap = new HashMap<>();
-                outputMap.put("Kwam bij ongeldige letter, dus gestopt.\nAfgelopen route: ", output);
+                Map<Integer, ArrayList<String>> outputMap = new HashMap<>();
+                outputMap.put(0, output);
                 return outputMap;
             }
         } else {
-            Map<String, ArrayList<String>> outputMap = new HashMap<>();
-            outputMap.put("Letters op.\nAfgelopen route: ", output);
+            Map<Integer, ArrayList<String>> outputMap = new HashMap<>();
+            outputMap.put(1, output);
             return outputMap;
         }
-        Map<String, ArrayList<String>> outputMap = new HashMap<>();
-        outputMap.put("Letters op.\nAfgelopen route: ", output);
+        Map<Integer, ArrayList<String>> outputMap = new HashMap<>();
+        outputMap.put(1, output);
         return outputMap;
     }
 
