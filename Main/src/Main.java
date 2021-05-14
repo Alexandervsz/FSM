@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -8,23 +6,11 @@ public class Main {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine().toUpperCase();
+        Node output = s0.connect(input);
+        System.out.println(output.getOutput());
+        System.out.println(output.getEndState());
 
-        Map<Integer, ArrayList<String>> output = s0.connect(input);
-        for (Map.Entry<Integer, ArrayList<String>> entry : output.entrySet()) {
-            Integer resultState = entry.getKey();
-            ArrayList<String> visitedNodes = entry.getValue();
-            String message = switch (resultState) {
-                case 0 -> "Kwam bij ongeldige letter, dus gestopt.\nAfgelopen route: ";
-                case 1 -> "Letters op.\nAfgelopen route: ";
-                default -> "Onbekende fout opgetreden.";
-            };
-            System.out.println(message);
-            for (String node: visitedNodes){
-                System.out.println(node);
-            }
         }
-
-    }
 
     public static Node initialiseNodes() {
         Node s0 = new Node("s0");
