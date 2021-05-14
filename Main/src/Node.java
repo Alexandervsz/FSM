@@ -7,6 +7,7 @@ public class Node {
     private final Map<String, Node> nodeConnections = new HashMap<>();
     private int endState;
     ArrayList<String> output = new ArrayList<>();
+    Node currentNode = this;
 
     public Node(String nodeName) {
         this.nodeName = nodeName;
@@ -17,7 +18,11 @@ public class Node {
     }
 
     public int getEndState() {
-        return this.endState;
+        return currentNode.endState;
+    }
+
+    public void setEndState(int endState) {
+        this.endState = endState;
     }
 
     public ArrayList<String> getOutput() {
@@ -29,7 +34,7 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-    public Node connect(String input) {
+    public void connect(String input) {
         /* This function tells the node whether to go to a next node or not. */
         output.add(nodeName);
         if (input.length() > 0) {
@@ -37,17 +42,15 @@ public class Node {
                 Node new_node = nodeConnections.get(input.substring(0, 1));
                 input = input.substring(1);
                 new_node.setOutput(output);
+                currentNode = new_node;
+                currentNode.setEndState(1);
                 new_node.connect(input);
             } else {
-                endState = 0;
-                return this;
+                currentNode.setEndState(0);
             }
         } else {
-            endState = 1;
-            return this;
+            currentNode.setEndState(1);
         }
-        endState = 1;
-        return this;
     }
 }
 
