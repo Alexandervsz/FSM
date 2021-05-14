@@ -5,14 +5,23 @@ import java.util.Map;
 public class Node {
     private final String nodeName;
     private final Map<String, Node> nodeConnections = new HashMap<>();
+    private int endState;
     ArrayList<String> output = new ArrayList<>();
+
+    public Node(String nodeName) {
+        this.nodeName = nodeName;
+    }
 
     public void setOutput(ArrayList<String> output) {
         this.output = output;
     }
 
-    public Node(String nodeName) {
-        this.nodeName = nodeName;
+    public int getEndState() {
+        return this.endState;
+    }
+
+    public ArrayList<String> getOutput() {
+        return this.output;
     }
 
     public void makeConnection(String letter, Node node) {
@@ -20,8 +29,7 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-
-    public Map<Integer, ArrayList<String>> connect(String input) {
+    public Node connect(String input) {
         /* This function tells the node whether to go to a next node or not. */
         output.add(nodeName);
         if (input.length() > 0) {
@@ -31,20 +39,16 @@ public class Node {
                 new_node.setOutput(output);
                 new_node.connect(input);
             } else {
-                Map<Integer, ArrayList<String>> outputMap = new HashMap<>();
-                outputMap.put(0, output);
-                return outputMap;
+                endState = 0;
+                return this;
             }
         } else {
-            Map<Integer, ArrayList<String>> outputMap = new HashMap<>();
-            outputMap.put(1, output);
-            return outputMap;
+            endState = 1;
+            return this;
         }
-        Map<Integer, ArrayList<String>> outputMap = new HashMap<>();
-        outputMap.put(1, output);
-        return outputMap;
+        endState = 1;
+        return this;
     }
-
 }
 
 
