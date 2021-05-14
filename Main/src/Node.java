@@ -15,11 +15,6 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-    public void connect(String input) {
-        // Helper function to create Arraylist.
-        ArrayList<String> output = new ArrayList<>();
-        connect(input, output);
-    }
 
     public Map<String, ArrayList<String>> connect(String input, ArrayList<String> output) {
         /* This function tells the node whether to go to a next node or not. */
@@ -39,7 +34,9 @@ public class Node {
             outputMap.put("Letters op.\nAfgelopen route: ", output);
             return outputMap;
         }
-        return null;
+        Map<String, ArrayList<String>> outputMap = new HashMap<>();
+        outputMap.put("Letters op.\nAfgelopen route: ", output);
+        return outputMap;
     }
 
 }
