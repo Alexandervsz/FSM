@@ -1,19 +1,33 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] kwargs) {
-        Node s0 = initialiseNodes();
+public class FiniteStateMachine {
+    public static void main(String[] args) {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine().toUpperCase();
-        String endState = s0.connect(input);
-        String outputString = switch (endState) {
+        Map<String, ArrayList<String>> nodeOutput = runNodes(input);
+        Map.Entry<String,ArrayList<String>> entry = nodeOutput.entrySet().iterator().next();
+        String key = entry.getKey();
+        ArrayList<String> outputArray = entry.getValue();
+        String outputString = switch (key) {
             case "0" -> "Ongeldige letter tegen gekomen.\nAfgelegd pad: ";
             case "1" -> "Afgelegd pad: ";
             default -> "Onbekende fout.\n Afgelegd pad: ";
         };
-        System.out.println(outputString+s0.getOutput());
-        }
+        System.out.println(outputString+outputArray);
+
+    }
+
+    public static Map<String, ArrayList<String>> runNodes(String input){
+        Node s0 = initialiseNodes();
+        Map<String, ArrayList<String>> outputMap = new HashMap<>();
+        outputMap.put(s0.connect(input), s0.getOutput());
+        return outputMap;
+
+    }
 
     public static Node initialiseNodes() {
         Node s0 = new Node("s0");
