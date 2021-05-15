@@ -18,7 +18,7 @@ public class Node {
     }
 
     public int getEndState() {
-        return currentNode.endState;
+        return endState;
     }
 
     public void setEndState(int endState) {
@@ -34,7 +34,7 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-    public void connect(String input) {
+    public String connect(String input) {
         /* This function tells the node whether to go to a next node or not. */
         output.add(nodeName);
         if (input.length() > 0) {
@@ -44,12 +44,12 @@ public class Node {
                 new_node.setOutput(output);
                 currentNode = new_node;
                 currentNode.setEndState(1);
-                new_node.connect(input);
+                return new_node.connect(input);
             } else {
-                currentNode.setEndState(0);
+                return "0";
             }
         } else {
-            currentNode.setEndState(1);
+            return "1";
         }
     }
 }

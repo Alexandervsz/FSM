@@ -6,10 +6,13 @@ public class Main {
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine().toUpperCase();
-        Node output = s0.connect(input);
-        System.out.println(output.getOutput());
-        System.out.println(output.getEndState());
-
+        String endState = s0.connect(input);
+        String outputString = switch (endState) {
+            case "0" -> "Ongeldige letter tegen gekomen.\nAfgelegd pad: ";
+            case "1" -> "Afgelegd pad: ";
+            default -> "Onbekende fout.\n Afgelegd pad: ";
+        };
+        System.out.println(outputString+s0.getOutput());
         }
 
     public static Node initialiseNodes() {
