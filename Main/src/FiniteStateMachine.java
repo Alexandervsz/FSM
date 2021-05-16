@@ -51,4 +51,24 @@ public class FiniteStateMachine {
         s3.makeConnection("B", s0);
         return s0;
     }
+
+    public static Node initialiseNodesGame() {
+        Node initial = new Node("Initial");
+        Node fight = new Node("Fight");
+        Node hurt = new Node("Fight");
+        Node dead = new Node("Dead");
+        Node hit = new Node("Hit");
+        Node won = new Node("Won");
+        initial.makeConnection("1", fight);
+        fight.makeConnection("0", hurt);
+        fight.makeConnection("1", hit);
+        hit.makeConnection("1", initial);
+        hit.makeConnection("2", initial);
+        hit.makeConnection("3", won);
+        hurt.makeConnection("1", initial);
+        hurt.makeConnection("2", initial);
+        hurt.makeConnection("3", dead);
+
+        return initial;
+    }
 }
