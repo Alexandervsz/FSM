@@ -5,24 +5,28 @@ import java.util.Map;
 public class Node {
     private final String nodeName;
     private final Map<String, Node> nodeConnections = new HashMap<>();
-    private int endState;
-    ArrayList<String> output = new ArrayList<>();
-    Node currentNode = this;
+    private ArrayList<String> output = new ArrayList<>();
+    private Node currentNode = this;
+    private boolean success = true;
 
     public Node(String nodeName) {
         this.nodeName = nodeName;
+    }
+
+    public Node getCurrentNode() {
+        return currentNode;
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 
     public void setOutput(ArrayList<String> output) {
         this.output = output;
     }
 
-    public int getEndState() {
-        return endState;
-    }
-
-    public void setEndState(int endState) {
-        this.endState = endState;
+    public String getNodeName() {
+        return nodeName;
     }
 
     public ArrayList<String> getOutput() {
@@ -34,24 +38,20 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-    public String connect(String input) {
-        /* This function tells the node whether to go to a next node or not. */
-        output.add(nodeName);
-        if (input.length() > 0) {
-            if (nodeConnections.containsKey(input.substring(0, 1))) {
-                Node new_node = nodeConnections.get(input.substring(0, 1));
-                input = input.substring(1);
-                new_node.setOutput(output);
-                currentNode = new_node;
-                currentNode.setEndState(1);
-                return new_node.connect(input);
-            } else {
-                return "0";
-            }
+    public void connect(char input) {
+        /* This changes the node to the next state. */
+        if (nodeConnections.containsKey(String.valueOf(input))) {
+            output.add(nodeName);
+            Node new_node = nodeConnections.get(String.valueOf(input));
+            new_node.setOutput(output);
+            currentNode = new_node;
         } else {
-            return "1";
+            success = false;
         }
+
     }
+
 }
+
 
 
