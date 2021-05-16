@@ -55,12 +55,12 @@ public class Tests {
 
 
         Assertions.assertAll(
-                () -> assertEquals(FiniteStateMachine.runNodes("A"), testOne),
-                () -> assertEquals(FiniteStateMachine.runNodes("BAAB"), testTwo),
-                () -> assertEquals(FiniteStateMachine.runNodes("AA"), testThree),
-                () -> assertEquals(FiniteStateMachine.runNodes("AX"), testFour),
-                () -> assertEquals(FiniteStateMachine.runNodes("1453"), testFive),
-                () -> assertEquals(FiniteStateMachine.runNodes(""), testSix)
+                () -> assertEquals(FiniteStateMachine.runNodesString("A"), testOne),
+                () -> assertEquals(FiniteStateMachine.runNodesString("BAAB"), testTwo),
+                () -> assertEquals(FiniteStateMachine.runNodesString("AA"), testThree),
+                () -> assertEquals(FiniteStateMachine.runNodesString("AX"), testFour),
+                () -> assertEquals(FiniteStateMachine.runNodesString("1453"), testFive),
+                () -> assertEquals(FiniteStateMachine.runNodesString(""), testSix)
 
         );
     }
