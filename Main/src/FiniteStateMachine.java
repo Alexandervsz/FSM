@@ -5,10 +5,14 @@ import java.util.Scanner;
 
 public class FiniteStateMachine {
     public static void main(String[] args) {
+        runFsmString();
+    }
+
+    public static void runFsmString(){
         System.out.println("Voer hier je input in: ");
         Scanner scanner2 = new Scanner(System.in);
         String input = scanner2.nextLine().toUpperCase();
-        Map<Boolean, ArrayList<String>> nodeOutput = runNodes(input);
+        Map<Boolean, ArrayList<String>> nodeOutput = runNodesString(input);
         Map.Entry<Boolean, ArrayList<String>> entry = nodeOutput.entrySet().iterator().next();
         Boolean success = entry.getKey();
         ArrayList<String> outputArray = entry.getValue();
@@ -19,8 +23,8 @@ public class FiniteStateMachine {
         System.out.println(outputString + outputArray);
     }
 
-    public static Map<Boolean, ArrayList<String>> runNodes(String input) {
-        Node s0 = initialiseNodes();
+    public static Map<Boolean, ArrayList<String>> runNodesString(String input) {
+        Node s0 = initialiseNodesString();
         Map<Boolean, ArrayList<String>> outputMap = new HashMap<>();
         char[] inputChars = input.toCharArray();
         for (char c : inputChars) {
@@ -33,7 +37,7 @@ public class FiniteStateMachine {
         return outputMap;
     }
 
-    public static Node initialiseNodes() {
+    public static Node initialiseNodesString() {
         Node s0 = new Node("s0");
         Node s1 = new Node("s1");
         Node s2 = new Node("s2");
