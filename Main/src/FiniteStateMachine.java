@@ -73,7 +73,7 @@ public class FiniteStateMachine {
                     hurtCounter++;
                     currentNode = changeState(hurtCounter, currentNode);
                 }
-                case "Won" -> {
+                case "Win" -> {
                     waitForUser("Je hebt gewonnen, gefeliciteerd! Druk op enter om af te sluiten.");
                     return;
                 }
@@ -131,13 +131,13 @@ public class FiniteStateMachine {
         Node hurt = new Node("Hurt");
         Node dead = new Node("Dead");
         Node hit = new Node("Hit");
-        Node won = new Node("Won");
+        Node win = new Node("Win");
         initial.makeConnection("1", fight);
         fight.makeConnection("0", hurt);
         fight.makeConnection("1", hit);
         hit.makeConnection("1", initial);
         hit.makeConnection("2", initial);
-        hit.makeConnection("3", won);
+        hit.makeConnection("3", win);
         hurt.makeConnection("1", initial);
         hurt.makeConnection("2", initial);
         hurt.makeConnection("3", dead);
