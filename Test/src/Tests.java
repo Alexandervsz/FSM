@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,43 +13,20 @@ public class Tests {
 
     @Test
     public void testString() {
-        Map<Boolean, ArrayList<String>> testOne = new HashMap<>();
-        ArrayList<String> testListOne = new ArrayList<>();
-        testListOne.add("s0");
-        testListOne.add("s2");
-        testOne.put(true, testListOne);
-
-        Map<Boolean, ArrayList<String>> testTwo = new HashMap<>();
-        ArrayList<String> testListTwo = new ArrayList<>();
-        testListTwo.add("s0");
-        testListTwo.add("s1");
-        testListTwo.add("s1");
-        testListTwo.add("s1");
-        testListTwo.add("s2");
-        testTwo.put(true, testListTwo);
-
-        Map<Boolean, ArrayList<String>> testThree = new HashMap<>();
-        ArrayList<String> testListThree = new ArrayList<>();
-        testListThree.add("s0");
-        testListThree.add("s2");
-        testThree.put(false, testListThree);
-
-        Map<Boolean, ArrayList<String>> testFour = new HashMap<>();
-        ArrayList<String> testListFour = new ArrayList<>();
-        testListFour.add("s0");
-        testListFour.add("s2");
-        testFour.put(false, testListFour);
-
-        Map<Boolean, ArrayList<String>> testFive = new HashMap<>();
-        ArrayList<String> testListFive = new ArrayList<>();
-        testListFive.add("s0");
-        testFive.put(false, testListFive);
-
-        Map<Boolean, ArrayList<String>> testSix = new HashMap<>();
-        ArrayList<String> testListSix = new ArrayList<>();
-        testListSix.add("s0");
-        testSix.put(true, testListSix);
-
+        //Testcase single A.
+        Map<Boolean, ArrayList<String>> testOne = runInputsString(new String[]{"s0", "s2"}, true);
+        //testcase BAAB.
+        Map<Boolean, ArrayList<String>> testTwo = runInputsString(new String[]{"s0", "s1", "s1", "s1", "s2"}, true);
+        //Testcase double A.
+        Map<Boolean, ArrayList<String>> testThree = runInputsString(new String[]{"s0", "s2"}, false);
+        //Testcase A, invalid letter.
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        Map<Boolean, ArrayList<String>> testFour = testThree;
+        //Testcase invalid string.
+        Map<Boolean, ArrayList<String>> testFive = runInputsString(new String[]{"s0"}, false);
+        //Testcase empty string.
+        Map<Boolean, ArrayList<String>> testSix = runInputsString(new String[]{"s0"}, true);
+        //Testcase large string.
         Map<Boolean, ArrayList<String>> nodeOutput = FiniteStateMachine.runNodesString("B".repeat(1000000));
         Map.Entry<Boolean, ArrayList<String>> entry = nodeOutput.entrySet().iterator().next();
         ArrayList<String> outputArray = entry.getValue();
@@ -67,14 +45,22 @@ public class Tests {
 
     @Test
     public void testGame() {
-        Node testNodeOne = runInputs(new String[]{"1"});
-        Node testNodeTwo = runInputs(new String[]{"15"});
-        Node testNodeThree = runInputs(new String[]{"1", "0", "1"});
-        Node testNodeFour = runInputs(new String[]{"1", "0", "3"});
-        Node testNodeFive = runInputs(new String[]{"1", "1", "2"});
-        Node testNodeSix = runInputs(new String[]{"1", "1", "3"});
-        Node testNodeSeven = runInputs(new String[]{"1", "0", "1", "1", "0", "2", "1", "0", "3"});
-        Node testNodeEight = runInputs(new String[]{"1", "1", "1", "1", "1", "2", "1", "1", "3"});
+        //Testcase initial node, valid input.
+        Node testNodeOne = runInputsGame(new String[]{"1"});
+        //Testcase initial node, invalid input.
+        Node testNodeTwo = runInputsGame(new String[]{"15"});
+        //Testcase one loop.
+        Node testNodeThree = runInputsGame(new String[]{"1", "0", "1"});
+        //Testcase full game, loss (simple).
+        Node testNodeFour = runInputsGame(new String[]{"1", "0", "3"});
+        //Testcase one loop, different node.
+        Node testNodeFive = runInputsGame(new String[]{"1", "1", "2"});
+        //Testcase full game, win (simple).
+        Node testNodeSix = runInputsGame(new String[]{"1", "1", "3"});
+        //Testcase full game, loss (full run).
+        Node testNodeSeven = runInputsGame(new String[]{"1", "0", "1", "1", "0", "2", "1", "0", "3"});
+        //Testcase full game, win (full run).
+        Node testNodeEight = runInputsGame(new String[]{"1", "1", "1", "1", "1", "2", "1", "1", "3"});
 
         Assertions.assertAll(
                 () -> assertEquals("Fight", testNodeOne.getNodeName()),
@@ -88,7 +74,14 @@ public class Tests {
         );
     }
 
-    public Node runInputs(String[] inputs) {
+    public Map<Boolean, ArrayList<String>> runInputsString(String[] inputs, boolean success){
+        Map<Boolean, ArrayList<String>> testMap = new HashMap<>();
+        ArrayList<String> testList = new ArrayList<>(Arrays.asList(inputs));
+        testMap.put(success, testList);
+        return testMap;
+    }
+
+    public Node runInputsGame(String[] inputs) {
         Node testNode = FiniteStateMachine.initialiseNodesGame();
         for (String input : inputs) {
             testNode.connect(input);
