@@ -39,7 +39,7 @@ public class Node {
     }
 
     public void connect(String input) {
-        /* This changes the node to the next state. */
+        /* This changes the node to the next state, sets success to false if connection is not defined. */
         if (nodeConnections.containsKey(input)) {
             output.add(nodeName);
             Node new_node = nodeConnections.get(input);
@@ -48,9 +48,7 @@ public class Node {
         } else {
             success = false;
         }
-
     }
-
 }
 
 
