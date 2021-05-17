@@ -39,10 +39,18 @@ public class Node {
     }
 
     public void connect(char input) {
+        connectToNode(String.valueOf(input));
+    }
+
+    public void connect(int input) {
+        connectToNode(String.valueOf(input));
+    }
+
+    public void connectToNode(String input) {
         /* This changes the node to the next state. */
-        if (nodeConnections.containsKey(String.valueOf(input))) {
+        if (nodeConnections.containsKey(input)) {
             output.add(nodeName);
-            Node new_node = nodeConnections.get(String.valueOf(input));
+            Node new_node = nodeConnections.get(input);
             new_node.setOutput(output);
             currentNode = new_node;
         } else {
