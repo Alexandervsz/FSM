@@ -38,11 +38,11 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-    public void connect(char input) {
+    public void connect(String input) {
         /* This changes the node to the next state. */
-        if (nodeConnections.containsKey(String.valueOf(input))) {
+        if (nodeConnections.containsKey(input)) {
             output.add(nodeName);
-            Node new_node = nodeConnections.get(String.valueOf(input));
+            Node new_node = nodeConnections.get(input);
             new_node.setOutput(output);
             currentNode = new_node;
         } else {

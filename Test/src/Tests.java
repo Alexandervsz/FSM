@@ -53,14 +53,20 @@ public class Tests {
         testListSix.add("s0");
         testSix.put(true, testListSix);
 
+        Map<Boolean, ArrayList<String>> nodeOutput = FiniteStateMachine.runNodesString("B".repeat(1000000));
+        Map.Entry<Boolean, ArrayList<String>> entry = nodeOutput.entrySet().iterator().next();
+        ArrayList<String> outputArray = entry.getValue();
+        int testSeven = outputArray.size();
+
 
         Assertions.assertAll(
-                () -> assertEquals(FiniteStateMachine.runNodes("A"), testOne),
-                () -> assertEquals(FiniteStateMachine.runNodes("BAAB"), testTwo),
-                () -> assertEquals(FiniteStateMachine.runNodes("AA"), testThree),
-                () -> assertEquals(FiniteStateMachine.runNodes("AX"), testFour),
-                () -> assertEquals(FiniteStateMachine.runNodes("1453"), testFive),
-                () -> assertEquals(FiniteStateMachine.runNodes(""), testSix)
+                () -> assertEquals(FiniteStateMachine.runNodesString("A"), testOne),
+                () -> assertEquals(FiniteStateMachine.runNodesString("BAAB"), testTwo),
+                () -> assertEquals(FiniteStateMachine.runNodesString("AA"), testThree),
+                () -> assertEquals(FiniteStateMachine.runNodesString("AX"), testFour),
+                () -> assertEquals(FiniteStateMachine.runNodesString("1453"), testFive),
+                () -> assertEquals(FiniteStateMachine.runNodesString(""), testSix),
+                () -> assertEquals(1000001, testSeven)
 
         );
     }
