@@ -19,6 +19,7 @@ public class FiniteStateMachine {
     }
 
     public static void runFsmString() {
+        // Runs the FSM in the string mode.
         String input = getUserInput("Voer hier je input in: ").toUpperCase();
         Map<Boolean, ArrayList<String>> nodeOutput = runNodesString(input);
         Map.Entry<Boolean, ArrayList<String>> entry = nodeOutput.entrySet().iterator().next();
@@ -32,6 +33,9 @@ public class FiniteStateMachine {
     }
 
     public static Map<Boolean, ArrayList<String>> runNodesString(String input) {
+        /* Takes in a String, then enters each character of the string into the node.
+        When it's done, gets the output from the node, and the success state, and returns this as map.
+         */
         Node s0 = initialiseNodesString();
         Map<Boolean, ArrayList<String>> outputMap = new HashMap<>();
         char[] inputChars = input.toCharArray();
@@ -45,6 +49,9 @@ public class FiniteStateMachine {
     }
 
     public static void runNodesGame() {
+        /* Starts up a new game, then keeps running an infinite loop until the user is
+        either dead, or has won.
+         */
         Node currentNode = initialiseNodesGame();
         Random rand = new Random();
         int hurtCounter = 0;
@@ -86,31 +93,37 @@ public class FiniteStateMachine {
     }
 
     public static void waitForUser(String message) {
+        //This function prints a message and waits for the user to press enter.
         System.out.println(message);
         Scanner scanner2 = new Scanner(System.in);
         scanner2.nextLine();
     }
 
     public static String getUserInput(String message) {
+        //This function asks the user for input then returns it.
         System.out.println(message);
         Scanner scanner2 = new Scanner(System.in);
         return scanner2.nextLine();
     }
 
     public static Node changeState(char input, Node currentNode) {
+        //This function changes a character into a string.
         return changeState(String.valueOf(input), currentNode);
     }
 
     public static Node changeState(int input, Node currentNode) {
+        //This function changes an int into a string
         return changeState(String.valueOf(input), currentNode);
     }
 
     public static Node changeState(String input, Node currentNode) {
+        //This function changes the node into the next state.
         currentNode.connect(input);
         return currentNode.getCurrentNode();
     }
 
     public static Node initialiseNodesString() {
+        //This function initialises the nodes for the string mode.
         Node s0 = new Node("s0");
         Node s1 = new Node("s1");
         Node s2 = new Node("s2");
@@ -126,6 +139,7 @@ public class FiniteStateMachine {
     }
 
     public static Node initialiseNodesGame() {
+        //This function initialises the nodes for the game mode.
         Node initial = new Node("Initial");
         Node fight = new Node("Fight");
         Node hurt = new Node("Hurt");
