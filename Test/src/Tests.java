@@ -74,7 +74,7 @@ public class Tests {
         );
     }
 
-    public Map<Boolean, ArrayList<String>> runInputsString(String[] inputs, boolean success){
+    public Map<Boolean, ArrayList<String>> runInputsString(String[] inputs, boolean success) {
         Map<Boolean, ArrayList<String>> testMap = new HashMap<>();
         ArrayList<String> testList = new ArrayList<>(Arrays.asList(inputs));
         testMap.put(success, testList);
