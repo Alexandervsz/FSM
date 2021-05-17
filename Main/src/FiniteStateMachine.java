@@ -61,42 +61,35 @@ public class FiniteStateMachine {
             switch (currentNode.getNodeName()) {
                 case "Initial" -> {
                     if (isFirst) {
-                        waitForUser("Welkom, druk op enter om verder te gaan");
+                        getUserInput("Welkom, druk op enter om verder te gaan");
                         isFirst = false;
                     }
                     currentNode = changeState(1, currentNode);
                 }
                 case "Fight" -> {
-                    waitForUser("Druk op enter om aan te vallen.");
+                    getUserInput("Druk op enter om aan te vallen.");
                     currentNode = changeState(rand.nextInt(2), currentNode);
                 }
                 case "Hit" -> {
-                    waitForUser("Je hebt de vijand geraakt! Druk op enter om verder te gaan.");
+                    getUserInput("Je hebt de vijand geraakt! Druk op enter om verder te gaan.");
                     hitCounter++;
                     currentNode = changeState(hitCounter, currentNode);
                 }
                 case "Hurt" -> {
-                    waitForUser("Je bent geraakt! Druk op enter om verder te gaan.");
+                    getUserInput("Je bent geraakt! Druk op enter om verder te gaan.");
                     hurtCounter++;
                     currentNode = changeState(hurtCounter, currentNode);
                 }
                 case "Win" -> {
-                    waitForUser("Je hebt gewonnen, gefeliciteerd! Druk op enter om af te sluiten.");
+                    getUserInput("Je hebt gewonnen, gefeliciteerd! Druk op enter om af te sluiten.");
                     return;
                 }
                 case "Dead" -> {
-                    waitForUser("Je bent dood, rust in vrede. Druk op enter om af te sluiten.");
+                    getUserInput("Je bent dood, rust in vrede. Druk op enter om af te sluiten.");
                     return;
                 }
             }
         }
-    }
-
-    public static void waitForUser(String message) {
-        //This function prints a message and waits for the user to press enter.
-        System.out.println(message);
-        Scanner scanner2 = new Scanner(System.in);
-        scanner2.nextLine();
     }
 
     public static String getUserInput(String message) {
