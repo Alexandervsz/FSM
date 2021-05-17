@@ -12,3 +12,4 @@ For the logic of the string based FSM a state diagram was provided by the school
 For the logic of the "game" FSM the following state diagram was used:
 ![Logic Diagram Game](Logic%20Diagram%20Game.png)
 
+To start the finite state machine, run the main found in FiniteStateMachine.java.
