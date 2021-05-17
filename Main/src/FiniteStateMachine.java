@@ -40,10 +40,14 @@ public class FiniteStateMachine {
         Random rand = new Random();
         int hurtCounter = 0;
         int hitCounter = 0;
-        while (!currentNode.getNodeName().equals("Dead") || !currentNode.getNodeName().equals("Won")) {
+        boolean isFirst = true;
+        while (true) {
             switch (currentNode.getNodeName()) {
                 case "Initial" -> {
-                    waitForUser("Welkom, druk op enter om verder te gaan");
+                    if (isFirst) {
+                        waitForUser("Welkom, druk op enter om verder te gaan");
+                        isFirst = false;
+                    }
                     currentNode.connect(1);
                     currentNode = currentNode.getCurrentNode();
                 }
@@ -64,16 +68,19 @@ public class FiniteStateMachine {
                     currentNode.connect(hurtCounter);
                     currentNode = currentNode.getCurrentNode();
                 }
+                case "Won" -> {
+                    waitForUser("Je hebt gewonnen, gefeliciteerd! Druk op enter om af te sluiten.");
+                    return;
+                }
+                case "Dead" -> {
+                    waitForUser("Je bent dood, rust in vrede. Druk op enter om af te sluiten.");
+                    return;
+                }
             }
         }
-        switch (currentNode.getNodeName()) {
-            case "Won" -> waitForUser("Je hebt gewonnen, gefeliciteerd! Druk op enter om af te sluiten.");
-            case "Dead" -> waitForUser("Je bent dood, rust in vrede. Druk op enter om af te sluiten.");
-        }
-
     }
 
-    public static void waitForUser(String message){
+    public static void waitForUser(String message) {
         System.out.println(message);
         Scanner scanner2 = new Scanner(System.in);
         scanner2.nextLine();
