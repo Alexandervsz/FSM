@@ -18,7 +18,6 @@ public class Tests {
         testListOne.add("s2");
         testOne.put(true, testListOne);
 
-
         Map<Boolean, ArrayList<String>> testTwo = new HashMap<>();
         ArrayList<String> testListTwo = new ArrayList<>();
         testListTwo.add("s0");
@@ -28,13 +27,11 @@ public class Tests {
         testListTwo.add("s2");
         testTwo.put(true, testListTwo);
 
-
         Map<Boolean, ArrayList<String>> testThree = new HashMap<>();
         ArrayList<String> testListThree = new ArrayList<>();
         testListThree.add("s0");
         testListThree.add("s2");
         testThree.put(false, testListThree);
-
 
         Map<Boolean, ArrayList<String>> testFour = new HashMap<>();
         ArrayList<String> testListFour = new ArrayList<>();
@@ -42,12 +39,10 @@ public class Tests {
         testListFour.add("s2");
         testFour.put(false, testListFour);
 
-
         Map<Boolean, ArrayList<String>> testFive = new HashMap<>();
         ArrayList<String> testListFive = new ArrayList<>();
         testListFive.add("s0");
         testFive.put(false, testListFive);
-
 
         Map<Boolean, ArrayList<String>> testSix = new HashMap<>();
         ArrayList<String> testListSix = new ArrayList<>();
@@ -59,16 +54,14 @@ public class Tests {
         ArrayList<String> outputArray = entry.getValue();
         int testSeven = outputArray.size();
 
-
         Assertions.assertAll(
-                () -> assertEquals(FiniteStateMachine.runNodesString("A"), testOne),
-                () -> assertEquals(FiniteStateMachine.runNodesString("BAAB"), testTwo),
-                () -> assertEquals(FiniteStateMachine.runNodesString("AA"), testThree),
-                () -> assertEquals(FiniteStateMachine.runNodesString("AX"), testFour),
-                () -> assertEquals(FiniteStateMachine.runNodesString("1453"), testFive),
-                () -> assertEquals(FiniteStateMachine.runNodesString(""), testSix),
+                () -> assertEquals(testOne, FiniteStateMachine.runNodesString("A")),
+                () -> assertEquals(testTwo, FiniteStateMachine.runNodesString("BAAB")),
+                () -> assertEquals(testThree, FiniteStateMachine.runNodesString("AA")),
+                () -> assertEquals(testFour, FiniteStateMachine.runNodesString("AX")),
+                () -> assertEquals(testFive, FiniteStateMachine.runNodesString("1453")),
+                () -> assertEquals(testSix, FiniteStateMachine.runNodesString("")),
                 () -> assertEquals(1000001, testSeven)
-
         );
     }
 
@@ -92,10 +85,8 @@ public class Tests {
                 () -> assertEquals("Win", testNodeSix.getNodeName()),
                 () -> assertEquals("Dead", testNodeSeven.getNodeName()),
                 () -> assertEquals("Win", testNodeEight.getNodeName())
-
         );
     }
-
 
     public Node runInputs(String[] inputs) {
         Node testNode = FiniteStateMachine.initialiseNodesGame();
@@ -105,5 +96,4 @@ public class Tests {
         }
         return testNode;
     }
-
 }
