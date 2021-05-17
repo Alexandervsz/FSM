@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class Tests {
 
     @Test
-    public void testNode() {
+    public void testString() {
         Map<Boolean, ArrayList<String>> testOne = new HashMap<>();
         ArrayList<String> testListOne = new ArrayList<>();
         testListOne.add("s0");
@@ -69,6 +70,40 @@ public class Tests {
                 () -> assertEquals(1000001, testSeven)
 
         );
+    }
+
+    @Test
+    public void testGame() {
+        Node testNodeOne = runInputs(new String[]{"1"});
+        Node testNodeTwo = runInputs(new String[]{"15"});
+        Node testNodeThree = runInputs(new String[]{"1", "0", "1"});
+        Node testNodeFour = runInputs(new String[]{"1", "0", "3"});
+        Node testNodeFive = runInputs(new String[]{"1", "1", "2"});
+        Node testNodeSix = runInputs(new String[]{"1", "1", "3"});
+        Node testNodeSeven = runInputs(new String[]{"1", "0", "1", "1", "0", "2", "1", "0", "3"});
+        Node testNodeEight = runInputs(new String[]{"1", "1", "1", "1", "1", "2", "1", "1", "3"});
+
+        Assertions.assertAll(
+                () -> assertEquals("Fight", testNodeOne.getNodeName()),
+                () -> assertFalse(testNodeTwo.isSuccess()),
+                () -> assertEquals("Initial", testNodeThree.getNodeName()),
+                () -> assertEquals("Dead", testNodeFour.getNodeName()),
+                () -> assertEquals("Initial", testNodeFive.getNodeName()),
+                () -> assertEquals("Win", testNodeSix.getNodeName()),
+                () -> assertEquals("Dead", testNodeSeven.getNodeName()),
+                () -> assertEquals("Win", testNodeEight.getNodeName())
+
+        );
+    }
+
+
+    public Node runInputs(String[] inputs) {
+        Node testNode = FiniteStateMachine.initialiseNodesGame();
+        for (String input : inputs) {
+            testNode.connect(input);
+            testNode = testNode.getCurrentNode();
+        }
+        return testNode;
     }
 
 }
