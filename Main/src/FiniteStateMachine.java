@@ -26,8 +26,7 @@ public class FiniteStateMachine {
         Map<Boolean, ArrayList<String>> outputMap = new HashMap<>();
         char[] inputChars = input.toCharArray();
         for (char c : inputChars) {
-            s0.connect(c);
-            s0 = s0.getCurrentNode();
+            s0 = changeState(c, s0);
         }
         ArrayList<String> output = s0.getOutput();
         output.add(s0.getCurrentNode().getNodeName());
@@ -48,25 +47,21 @@ public class FiniteStateMachine {
                         waitForUser("Welkom, druk op enter om verder te gaan");
                         isFirst = false;
                     }
-                    currentNode.connect(1);
-                    currentNode = currentNode.getCurrentNode();
+                    currentNode = changeState(1, currentNode);
                 }
                 case "Fight" -> {
                     waitForUser("Druk op enter om aan te vallen.");
-                    currentNode.connect(rand.nextInt(2));
-                    currentNode = currentNode.getCurrentNode();
+                    currentNode = changeState(rand.nextInt(2), currentNode);
                 }
                 case "Hit" -> {
                     waitForUser("Je hebt de vijand geraakt! Druk op enter om verder te gaan.");
                     hitCounter++;
-                    currentNode.connect(hitCounter);
-                    currentNode = currentNode.getCurrentNode();
+                    currentNode = changeState(hitCounter, currentNode);
                 }
                 case "Hurt" -> {
                     waitForUser("Je bent geraakt! Druk op enter om verder te gaan.");
                     hurtCounter++;
-                    currentNode.connect(hurtCounter);
-                    currentNode = currentNode.getCurrentNode();
+                    currentNode = changeState(hurtCounter, currentNode);
                 }
                 case "Won" -> {
                     waitForUser("Je hebt gewonnen, gefeliciteerd! Druk op enter om af te sluiten.");
@@ -84,6 +79,19 @@ public class FiniteStateMachine {
         System.out.println(message);
         Scanner scanner2 = new Scanner(System.in);
         scanner2.nextLine();
+    }
+
+    public static Node changeState(char input, Node currentNode) {
+        return changeState(String.valueOf(input), currentNode);
+    }
+
+    public static Node changeState(int input, Node currentNode) {
+        return changeState(String.valueOf(input), currentNode);
+    }
+
+    public static Node changeState(String input, Node currentNode) {
+        currentNode.connect(input);
+        return currentNode.getCurrentNode();
     }
 
     public static Node initialiseNodesString() {
@@ -117,8 +125,6 @@ public class FiniteStateMachine {
         hurt.makeConnection("1", initial);
         hurt.makeConnection("2", initial);
         hurt.makeConnection("3", dead);
-
         return initial;
     }
-
 }

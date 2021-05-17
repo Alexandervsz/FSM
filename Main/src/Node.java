@@ -38,15 +38,7 @@ public class Node {
         nodeConnections.put(letter, node);
     }
 
-    public void connect(char input) {
-        connectToNode(String.valueOf(input));
-    }
-
-    public void connect(int input) {
-        connectToNode(String.valueOf(input));
-    }
-
-    public void connectToNode(String input) {
+    public void connect(String input) {
         /* This changes the node to the next state. */
         if (nodeConnections.containsKey(input)) {
             output.add(nodeName);
