@@ -2,14 +2,24 @@ import java.util.*;
 
 public class FiniteStateMachine {
     public static void main(String[] args) {
-        runNodesGame();
-        //runFsmString();
+        String mode = getUserInput("Kies een mode, \"Letters\" of \"Spel\"").toLowerCase();
+        while (true) {
+            switch (mode) {
+                case "letters", "l" -> {
+                    runFsmString();
+                    return;
+                }
+                case "spel", "s" -> {
+                    runNodesGame();
+                    return;
+                }
+                default -> mode = getUserInput("Verkeerde input, voer een andere optie in");
+            }
+        }
     }
 
     public static void runFsmString() {
-        System.out.println("Voer hier je input in: ");
-        Scanner scanner2 = new Scanner(System.in);
-        String input = scanner2.nextLine().toUpperCase();
+        String input = getUserInput("Voer hier je input in: ").toUpperCase();
         Map<Boolean, ArrayList<String>> nodeOutput = runNodesString(input);
         Map.Entry<Boolean, ArrayList<String>> entry = nodeOutput.entrySet().iterator().next();
         Boolean success = entry.getKey();
@@ -79,6 +89,12 @@ public class FiniteStateMachine {
         System.out.println(message);
         Scanner scanner2 = new Scanner(System.in);
         scanner2.nextLine();
+    }
+
+    public static String getUserInput(String message) {
+        System.out.println(message);
+        Scanner scanner2 = new Scanner(System.in);
+        return scanner2.nextLine();
     }
 
     public static Node changeState(char input, Node currentNode) {
